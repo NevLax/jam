@@ -42,5 +42,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		loader.dispose();
 		world.dispose();
+		simpleBody.dispose();
 	}
 }
