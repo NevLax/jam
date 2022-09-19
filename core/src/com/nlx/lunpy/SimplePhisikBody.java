@@ -51,7 +51,7 @@ public class SimplePhisikBody {
         fixture = body.createFixture(fixtureDef);
     }
 
-    SimplePhisikBody(World world, float x, float y, float hx, float hy){
+    public SimplePhisikBody(World world, float x, float y, float hx, float hy){
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
@@ -68,6 +68,29 @@ public class SimplePhisikBody {
         fixtureDef.restitution = restitution;
 
         fixture = body.createFixture(fixtureDef);
+    }
+
+    public SimplePhisikBody(World world, float x, float y, float hx, float hy, float den, float fri, float res){
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(x, y);
+
+        body = world.createBody(bodyDef);
+
+        shape = new PolygonShape();
+        shape.setAsBox(hx, hy);
+
+        fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = den;
+        fixtureDef.friction = fri;
+        fixtureDef.restitution = res;
+
+        fixture = body.createFixture(fixtureDef);
+    }
+
+    public Body getBody(){
+        return body;
     }
 
     public void dispose(){

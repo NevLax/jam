@@ -11,37 +11,41 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.nlx.lunpy.player.Player;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	LoadResorse loader;
-	Texture img;
 	World world;
 	Box2DDebugRenderer debugRenderer;
 	SimplePhisikBody simpleBody;
 	Viewport viewport;
 	Camera camera;
+	Player player;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
 		loader = new LoadResorse();
-		img = loader.getBadLogo();
 		world = new World(Vector2.Zero, true);
+
+		batch = new SpriteBatch();
 		debugRenderer = new Box2DDebugRenderer();
-		simpleBody = new SimplePhisikBody(world);
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(1280, 720, camera);
 
+		player = new Player(world, loader);
 	}
 
 	@Override
 	public void render () {
+		player.update();
 		world.step(1/60f, 4, 4);
-		ScreenUtils.clear(1, 0, 0, 1);
+
+		ScreenUtils.clear(0.1f, 0.1f, 0.22f, 0f);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		player.draw(batch);
 		batch.end();
+
 		debugRenderer.render(world, camera.combined);
 	}
 

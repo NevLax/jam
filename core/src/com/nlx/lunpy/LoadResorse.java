@@ -5,17 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class LoadResorse {
 
-    private final Texture badLogo;
+    private final Texture playerAtlas;
 
     LoadResorse(){
-        badLogo = new Texture(Gdx.files.internal("badlogic.jpg"));
+        playerAtlas = new Texture(Gdx.files.internal("player.png"));
     }
 
-    public Texture getBadLogo(){
-        return badLogo;
+    public Texture player(){
+        return playerAtlas;
     }
 
     public void dispose(){
-        badLogo.dispose();
+        playerAtlas.dispose();
     }
 }
