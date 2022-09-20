@@ -1,6 +1,6 @@
 package com.nlx.lunpy;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.nlx.lunpy.player.Player;
 
-public class MyGdxGame extends ApplicationAdapter {
+public class MyGdxScreen implements Screen {
+	final MainGame game;
+
 	SpriteBatch batch;
 	LoadResourse loader;
 	World world;
@@ -20,9 +22,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	Viewport viewport;
 	Camera camera;
 	Player player;
-	
-	@Override
-	public void create () {
+
+	MyGdxScreen(final MainGame mainGame) {
+		game = mainGame;
+
 		loader = new LoadResourse();
 		world = new World(Vector2.Zero, true);
 		player = new Player(world, loader);
@@ -35,7 +38,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render(float delta) {
 		player.update();
 		world.step(1/60f, 4, 4);
 
@@ -49,6 +52,26 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	public void resize(int width, int height) {
 		viewport.update(1280, 720);
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void show() {
+
+	}
+
+	@Override
+	public void hide() {
+
 	}
 
 	@Override
