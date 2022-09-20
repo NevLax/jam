@@ -3,7 +3,6 @@ package com.nlx.lunpy;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -18,7 +17,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	LoadResorse loader;
 	World world;
 	Box2DDebugRenderer debugRenderer;
-	SimplePhisikBody simpleBody;
 	Viewport viewport;
 	Camera camera;
 	Player player;
@@ -31,6 +29,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera();
+		camera.transform(camera.invProjectionView);
+		camera.update();
 		viewport = new ExtendViewport(1280, 720, camera);
 
 		player = new Player(world, loader);
@@ -58,6 +58,5 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		loader.dispose();
 		world.dispose();
-		simpleBody.dispose();
 	}
 }

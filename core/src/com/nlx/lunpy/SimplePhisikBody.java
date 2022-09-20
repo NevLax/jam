@@ -87,6 +87,7 @@ public class SimplePhisikBody {
         fixtureDef.restitution = res;
 
         fixture = body.createFixture(fixtureDef);
+        body.setFixedRotation(true);
     }
 
     public Body getBody(){

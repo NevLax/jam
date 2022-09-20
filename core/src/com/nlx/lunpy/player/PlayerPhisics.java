@@ -14,9 +14,7 @@ public class PlayerPhisics {
     }
 
     public void applyImpulse(Vector2 vector) {
-//        body.applyLinearImpulse(vector, Vector2.Zero, true);
         body.setLinearVelocity(vector);
-//        body.applyForceToCenter(vector, true);
     }
 
     public Vector2 getPosition(){
