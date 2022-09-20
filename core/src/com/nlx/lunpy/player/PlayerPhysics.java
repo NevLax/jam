@@ -5,11 +5,12 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nlx.lunpy.SimplePhisikBody;
 
-public class PlayerPhisics {
+public class PlayerPhysics {
     SimplePhisikBody dinamyc;
     Body body;
-    PlayerPhisics(World world){
-            dinamyc = new SimplePhisikBody(world, 0f, 0f, 16, 16, 0.005f, 0.1f, 0.6f);
+    int halfTile = 16;
+    PlayerPhysics(World world){
+            dinamyc = new SimplePhisikBody(world, 0f, 0f, halfTile, halfTile, 0.005f, 0.1f, 0.6f);
             body = dinamyc.getBody();
     }
 

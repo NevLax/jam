@@ -3,11 +3,11 @@ package com.nlx.lunpy;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class LoadResorse {
+public class LoadResourse {
 
     private final Texture playerAtlas;
 
-    LoadResorse(){
+    LoadResourse(){
         playerAtlas = new Texture(Gdx.files.internal("player.png"));
     }
 

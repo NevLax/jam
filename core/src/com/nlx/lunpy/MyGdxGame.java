@@ -14,7 +14,7 @@ import com.nlx.lunpy.player.Player;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	LoadResorse loader;
+	LoadResourse loader;
 	World world;
 	Box2DDebugRenderer debugRenderer;
 	Viewport viewport;
@@ -23,17 +23,15 @@ public class MyGdxGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		loader = new LoadResorse();
+		loader = new LoadResourse();
 		world = new World(Vector2.Zero, true);
-
-		batch = new SpriteBatch();
-		debugRenderer = new Box2DDebugRenderer();
-		camera = new OrthographicCamera();
-		camera.transform(camera.invProjectionView);
-		camera.update();
-		viewport = new ExtendViewport(1280, 720, camera);
-
 		player = new Player(world, loader);
+		viewport = new ExtendViewport(1280, 720);
+
+		debugRenderer = new Box2DDebugRenderer();
+		camera = new OrthographicCamera(1280,720);
+		batch = new SpriteBatch();
+		batch.setProjectionMatrix(camera.combined);
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	}
 
 	public void resize(int width, int height) {
-		viewport.update(width, height);
+		viewport.update(1280, 720);
 	}
 
 	@Override
@@ -58,5 +56,6 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		loader.dispose();
 		world.dispose();
+		player.dispose();
 	}
 }
