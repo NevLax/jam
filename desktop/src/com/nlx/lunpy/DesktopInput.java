@@ -3,6 +3,7 @@ package com.nlx.lunpy;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class DesktopInput implements MyInput{
     boolean Up;
@@ -30,6 +31,11 @@ public class DesktopInput implements MyInput{
         else vec.x = 0;
 
         return vec;
+    }
+
+    @Override
+    public void setTable(Table table) {
+
     }
 
     private void touch(){
