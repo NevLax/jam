@@ -8,7 +8,7 @@ public class LoadResourse {
     private final Texture playerAtlas;
 
     LoadResourse(){
-        playerAtlas = new Texture(Gdx.files.internal("player.png"));
+        playerAtlas = new Texture(Gdx.files.internal("aprpa.png"));
     }
 
     public Texture player(){

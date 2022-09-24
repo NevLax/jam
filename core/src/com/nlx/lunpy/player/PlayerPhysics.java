@@ -8,9 +8,8 @@ import com.nlx.lunpy.SimplePhisikBody;
 public class PlayerPhysics {
     SimplePhisikBody dinamyc;
     Body body;
-    int halfTile = 16;
     PlayerPhysics(World world){
-            dinamyc = new SimplePhisikBody(world, 0f, 0f, halfTile, halfTile, 0.005f, 0.1f, 0.6f);
+            dinamyc = new SimplePhisikBody(world, 0f, 0f, 22, 42, 0.005f, 0.1f, 0.6f);
             body = dinamyc.getBody();
     }
 
