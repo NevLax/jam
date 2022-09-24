@@ -14,7 +14,6 @@ import com.nlx.lunpy.player.Player;
 
 public class MyGdxScreen implements Screen {
 	final MainGame game;
-
 	SpriteBatch batch;
 	LoadResourse loader;
 	World world;
@@ -23,12 +22,12 @@ public class MyGdxScreen implements Screen {
 	Camera camera;
 	Player player;
 
-	MyGdxScreen(final MainGame mainGame) {
+	MyGdxScreen(final MainGame mainGame, MyInput input) {
 		game = mainGame;
 
 		loader = new LoadResourse();
 		world = new World(Vector2.Zero, true);
-		player = new Player(world, loader);
+		player = new Player(world, loader, input);
 		viewport = new ExtendViewport(1280, 720);
 
 		debugRenderer = new Box2DDebugRenderer();

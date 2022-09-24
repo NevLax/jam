@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class MenuScreen implements Screen {
+    MyInput input;
     Stage stage;
     Table table;
     TextButton butt;
@@ -22,7 +23,7 @@ public class MenuScreen implements Screen {
     BitmapFont font;
     final MainGame game;
 
-    MenuScreen(final MainGame mainGame) {
+    MenuScreen(final MainGame mainGame, MyInput input) {
         stage = new Stage(new ExtendViewport(1280,720));
         game = mainGame;
 
@@ -44,6 +45,8 @@ public class MenuScreen implements Screen {
         style.font = font;
         butt = new TextButton("Start", style);
         table.add(butt);
+
+        this.input = input;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Gdx.input.isTouched()) {
-            game.setScreen(new MyGdxScreen(game));
+            game.setScreen(new MyGdxScreen(game, input));
             dispose();
         }
         stage.act(Gdx.graphics.getDeltaTime());
