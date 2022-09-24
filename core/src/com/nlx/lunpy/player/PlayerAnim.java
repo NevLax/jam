@@ -7,6 +7,7 @@ import com.nlx.lunpy.LoadResourse;
 
 public class PlayerAnim {
     Texture atlas;
+    boolean toLeft;
 
 
     PlayerAnim(LoadResourse res){
@@ -15,10 +16,22 @@ public class PlayerAnim {
 
     public void draw(SpriteBatch batch, Vector2 position){
 
-        batch.draw(atlas,
-                position.x - atlas.getWidth() / 4f,
-                position.y - atlas.getHeight() / 4f,
-                atlas.getWidth() / 2f,
-                atlas.getHeight() / 2f);
+        if (toLeft) batch.draw(atlas,
+                        position.x + atlas.getWidth() / 4f,
+                        position.y - atlas.getHeight() / 4f,
+                        atlas.getWidth() / 2f * -1,
+                        atlas.getHeight() / 2f);
+        else batch.draw(atlas,
+                        position.x - atlas.getWidth() / 4f,
+                        position.y - atlas.getHeight() / 4f,
+                        atlas.getWidth() / 2f,
+                        atlas.getHeight() / 2f);
+
     }
+
+    public void direction(Vector2 move){
+        if (move.x > 0) toLeft = false;
+        if (move.x < 0) toLeft = true;
+    }
+
 }

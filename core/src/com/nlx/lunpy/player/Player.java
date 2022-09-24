@@ -20,6 +20,7 @@ public class Player {
     public void update(){
         move = control.update();
         phisics.applyImpulse(move);
+        anim.direction(move);
     }
 
     public void draw(SpriteBatch batch){
