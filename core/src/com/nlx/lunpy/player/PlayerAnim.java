@@ -14,19 +14,18 @@ public class PlayerAnim {
         atlas = res.player();
     }
 
-    public void draw(SpriteBatch batch, Vector2 position){
+    public void draw(SpriteBatch bobo, Vector2 position){
 
-        if (toLeft) batch.draw(atlas,
+        if (toLeft) bobo.draw(atlas,
                         position.x + atlas.getWidth() / 4f,
                         position.y - atlas.getHeight() / 4f,
                         atlas.getWidth() / 2f * -1,
                         atlas.getHeight() / 2f);
-        else batch.draw(atlas,
+        else bobo.draw(atlas,
                         position.x - atlas.getWidth() / 4f,
                         position.y - atlas.getHeight() / 4f,
                         atlas.getWidth() / 2f,
                         atlas.getHeight() / 2f);
-
     }
 
     public void direction(Vector2 move){

@@ -5,15 +5,16 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 public class MenuScreen implements Screen {
-    MyInput input;
     Stage stage;
     Table table;
     TextButton butt;
@@ -23,8 +24,9 @@ public class MenuScreen implements Screen {
     BitmapFont font;
     final MainGame game;
 
-    MenuScreen(final MainGame mainGame, MyInput input) {
+    MenuScreen(final MainGame mainGame, final MyInput input) {
         stage = new Stage(new ExtendViewport(1280,720));
+        Gdx.input.setInputProcessor(stage);
         game = mainGame;
 
         table = new Table();
@@ -44,19 +46,20 @@ public class MenuScreen implements Screen {
         style.checked = check;
         style.font = font;
         butt = new TextButton("Start", style);
-        table.add(butt);
-
-        this.input = input;
+        butt.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new MyGdxScreen(game, input));
+                dispose();
+            }
+        } );
+        table.add(butt).width(160f).height(80f);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new MyGdxScreen(game, input));
-            dispose();
-        }
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
@@ -89,5 +92,6 @@ public class MenuScreen implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
     }
 }
