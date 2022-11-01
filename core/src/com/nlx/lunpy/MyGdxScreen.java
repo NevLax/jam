@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.nlx.lunpy.player.Player;
 
 public class MyGdxScreen implements Screen {
+	MyInput input;
 	Stage stage;
 	final MainGame game;
 	SpriteBatch batch;
@@ -27,6 +28,7 @@ public class MyGdxScreen implements Screen {
 	Grass grass;
 
 	MyGdxScreen(final MainGame mainGame, MyInput input) {
+		this.input = input;
 		game = mainGame;
 
 		loader = new LoadResourse();
@@ -41,13 +43,20 @@ public class MyGdxScreen implements Screen {
 		debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera(1280,720);
 		batch = new SpriteBatch();
-		batch.setProjectionMatrix(camera.combined);
 	}
 
 	@Override
 	public void render(float delta) {
 		player.update();
 		world.step(1/60f, 4, 4);
+		camera.translate(
+				(float) (player.phisics.body.getPosition().x - camera.position.x + (Gdx.input.getX() - 0.5 * Gdx.graphics.getWidth())),
+				(float) (player.phisics.body.getPosition().y - camera.position.y - (Gdx.input.getY() - 0.5 * Gdx.graphics.getHeight())),
+				camera.position.z
+		);
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+		System.out.println(camera.position.x + ":" + camera.position.y);
 
 		ScreenUtils.clear(0.1f, 0.1f, 0.22f, 0f);
 		batch.begin();

@@ -10,8 +10,8 @@ public class Player {
 
     MyInput input;
     PlayerAnim anim;
-    PlayerController control;
-    PlayerPhysics phisics;
+    public PlayerController control;
+    public PlayerPhysics phisics;
     Vector2 move;
 
     public Player(World world, LoadResourse res, MyInput input){
