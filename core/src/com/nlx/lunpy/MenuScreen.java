@@ -18,6 +18,7 @@ public class MenuScreen implements Screen {
     Stage stage;
     Table table;
     TextButton butt;
+    TextButton exitButt;
     TextureRegionDrawable up;
     TextureRegionDrawable down;
     TextureRegionDrawable check;
@@ -33,7 +34,7 @@ public class MenuScreen implements Screen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        table.setDebug(true);
+//        table.setDebug(true);
 
         up = new TextureRegionDrawable(new Texture(Gdx.files.internal("buttNinePatch/butt_up.png")));
         down = new TextureRegionDrawable(new Texture(Gdx.files.internal("buttNinePatch/butt_down.png")));
@@ -45,6 +46,7 @@ public class MenuScreen implements Screen {
         style.down = down;
         style.checked = check;
         style.font = font;
+
         butt = new TextButton("Start", style);
         butt.addListener(new ChangeListener() {
             @Override
@@ -53,7 +55,16 @@ public class MenuScreen implements Screen {
                 dispose();
             }
         } );
-        table.add(butt).width(160f).height(80f);
+        table.add(butt).width(160f).height(80f).pad(10f);
+
+        exitButt = new TextButton("Exit", style);
+        exitButt.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.exit();
+            }
+        } );
+        table.add(exitButt).width(160f).height(80f).pad(10f);
     }
 
     @Override
