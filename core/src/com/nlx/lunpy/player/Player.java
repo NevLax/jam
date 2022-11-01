@@ -38,4 +38,8 @@ public class Player {
     private Vector2 getPreMove(){
         return input.getIn();
     }
+
+    public float getY() {
+        return phisics.body.getPosition().y;
+    }
 }

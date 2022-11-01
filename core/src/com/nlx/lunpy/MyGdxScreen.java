@@ -24,6 +24,7 @@ public class MyGdxScreen implements Screen {
 	Viewport viewport;
 	Camera camera;
 	Player player;
+	Grass grass;
 
 	MyGdxScreen(final MainGame mainGame, MyInput input) {
 		game = mainGame;
@@ -31,6 +32,7 @@ public class MyGdxScreen implements Screen {
 		loader = new LoadResourse();
 		world = new World(Vector2.Zero, true);
 		player = new Player(world, loader, input);
+		grass = new Grass(100f, -100f);
 		viewport = new ExtendViewport(1280f, 720f);
 		stage = new Stage(new ExtendViewport(1280f, 720f));
         Gdx.input.setInputProcessor(stage);
@@ -49,7 +51,13 @@ public class MyGdxScreen implements Screen {
 
 		ScreenUtils.clear(0.1f, 0.1f, 0.22f, 0f);
 		batch.begin();
-		player.draw(batch);
+		if (player.getY() > grass.getY()) {
+			player.draw(batch);
+			grass.draw(batch);
+		}	else {
+			grass.draw(batch);
+			player.draw(batch);
+		}
 		batch.end();
 
 		stage.draw();
@@ -88,5 +96,6 @@ public class MyGdxScreen implements Screen {
 		loader.dispose();
 		world.dispose();
 		player.dispose();
+		grass.dispose();
 	}
 }
