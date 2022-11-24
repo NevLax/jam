@@ -26,6 +26,7 @@ public class MyGdxScreen implements Screen {
 	Camera camera;
 	Player player;
 	Grass grass;
+	Vector2 bufferCamera;
 
 	MyGdxScreen(final MainGame mainGame, MyInput input) {
 		this.input = input;
@@ -39,6 +40,7 @@ public class MyGdxScreen implements Screen {
 		stage = new Stage(new ExtendViewport(1280f, 720f));
         Gdx.input.setInputProcessor(stage);
 		input.setStage(stage);
+		bufferCamera = new Vector2();
 
 		debugRenderer = new Box2DDebugRenderer();
 		camera = new OrthographicCamera(1280,720);
@@ -49,14 +51,14 @@ public class MyGdxScreen implements Screen {
 	public void render(float delta) {
 		player.update();
 		world.step(1/60f, 4, 4);
+		if (input.IsTouch()) bufferCamera = input.getCameraVector();
 		camera.translate(
-				(float) (player.phisics.body.getPosition().x - camera.position.x + (Gdx.input.getX() - 0.5 * Gdx.graphics.getWidth())),
-				(float) (player.phisics.body.getPosition().y - camera.position.y - (Gdx.input.getY() - 0.5 * Gdx.graphics.getHeight())),
+				(player.phisics.body.getPosition().x - camera.position.x + bufferCamera.x),
+				(player.phisics.body.getPosition().y - camera.position.y + bufferCamera.y),
 				camera.position.z
 		);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
-		System.out.println(camera.position.x + ":" + camera.position.y);
 
 		ScreenUtils.clear(0.1f, 0.1f, 0.22f, 0f);
 		batch.begin();

@@ -34,6 +34,19 @@ public class DesktopInput implements MyInput{
     }
 
     @Override
+    public Vector2 getCameraVector() {
+        return new Vector2(
+                (float) (Gdx.input.getX() - 0.5 * Gdx.graphics.getWidth()),
+                (float) -(Gdx.input.getY() - 0.5 * Gdx.graphics.getHeight())
+        );
+    }
+
+    @Override
+    public boolean IsTouch() {
+        return true;
+    }
+
+    @Override
     public void setStage(Stage stage) {
 
     }

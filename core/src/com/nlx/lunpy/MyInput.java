@@ -5,5 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public interface MyInput {
     Vector2 getIn();
+    Vector2 getCameraVector();
+    boolean IsTouch();
     void setStage(Stage stage);
+
 }
